@@ -4,7 +4,14 @@ import loginImg from "../../public/login.png";
 import logoSvg from "../../public/logo.svg";
 import { Button } from "../_components/ui/button";
 import { LogInIcon } from "lucide-react";
-export default function LoginPage() {
+import { SignInButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+export default async function LoginPage() {
+  const { userId } = await auth();
+  if (userId) {
+    redirect("/");
+  }
   return (
     <div className="grid h-full grid-cols-2">
       {/* Direita */}
@@ -22,11 +29,12 @@ export default function LoginPage() {
           monitorar suas movimentações, e oferecer insights personalizados,
           facilitando o controle do seu orçamento.
         </p>
-
-        <Button variant="outline">
-          <LogInIcon className="mr-2" />
-          Fazer Login ou Criar Conta
-        </Button>
+        <SignInButton>
+          <Button variant="outline">
+            <LogInIcon className="mr-2" />
+            Fazer Login ou Criar Conta
+          </Button>
+        </SignInButton>
       </div>
 
       <div className="relative h-full w-full">
