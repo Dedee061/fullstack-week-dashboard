@@ -2,8 +2,8 @@ import { Button } from "./_components/ui/button";
 
 export default function Home() {
   return (
-    <div>
-      <Button></Button>
+    <div className="">
+      <Button>Olá Mundo</Button>
     </div>
   );
 }
